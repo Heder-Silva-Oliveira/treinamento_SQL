@@ -15,10 +15,6 @@ select
 from mov_estoque
 group by cod_prod, tipo_movimento
 
-select*from acumulado
-
-
-
 
 insert into acumulado_final (cod_prod, tipo_movimentacao, quantidade, valor)
 select
@@ -26,7 +22,7 @@ cod_prod as codigo_produto,
 'ENT' as tipo_movimento,
 sum(quantidade) as quantidade,
 sum(valor) as valor
-from acumulado_v3
+from acumulado
 where tipo_movimentacao in ('ENT', 'AJE')
 group by cod_prod
 union
@@ -35,8 +31,7 @@ cod_prod as codigo_produto,
 'SAD' as tipo_movimento,
 sum(quantidade) as quantidade,
 sum(valor) as valor
-from acumulado_v3
+from acumulado
 where tipo_movimentacao in ('SAD', 'AJS')
 group by cod_prod
 
-select * from acumulado_final
